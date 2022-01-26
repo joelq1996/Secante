@@ -1,0 +1,6 @@
+f = @(x) x.^3-12;
+a = 0;
+b = 3;
+maxiter=1000;
+[f,iteraciones] = secante(f,a,b,tol,maxiter);
+fprintf('El valor de corte es y = %f, el numero de iteraciones es %d\n',y,iter);
