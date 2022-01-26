@@ -1,0 +1,32 @@
+%{
+Joel Quintuna
+f: funcion a evaluar
+a y b: valores del intervalo en el que se evaluar? si existe una raiz
+tol: tolerancia maxima en la aproximacion
+y: valor aproximado de la raiz
+iter: numero de iteraciones realizadas
+%}
+function [y,iter]=secante(f,a,b,tol,maxiter)
+u=f(a);
+v=f(b);
+iter = 1; 
+x0=a;
+x1=b;
+if f(a)*f(b)<0 %se verifica si se cumple el teorema de Bolsano
+    while abs(u)>tol && iter<maxiter
+        c = x0-u*(x1-x0)/(v-u); %nueva aproximacion
+        x0 = c; %actualizamos las variables con el nuevo valor
+        x1 = b;
+        u = f(x0); %calculamos nuevamente las funciones para los nuevos valores
+        v = f(x1);
+        iter = iter+1; 
+    end
+    if iter==maxiter
+      error('Metodo de la Secante: no existe raiz en el intervalo [%d,%d]', a,b);
+    else
+     y = c; %le asignamos a y el valor de la aproximacion de corte
+    end
+else
+    error('Metodo de la Secante: no existe raiz en el intervalo [%d,%d]', a,b);
+end
+end
